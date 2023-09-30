@@ -1,7 +1,7 @@
 local monarch = require "monarch.monarch"
 local transitions = require "monarch.transitions.gui"
 local cyclist_service = require "main.model.cyclist"
-local druid = require("druid.druid")
+local druid = require "druid.druid"
 
 function init(self)
     gui.set_render_order(12)
