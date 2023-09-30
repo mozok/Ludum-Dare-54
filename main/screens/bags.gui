@@ -1,0 +1,2 @@
+script: "/main/screens/bags.gui_script"
+adjust_reference: ADJUST_REFERENCE_PARENT
