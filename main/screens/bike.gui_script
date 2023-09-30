@@ -25,6 +25,10 @@ function init(self)
     self.druid:new_button("button_routes/button", function()
         monarch.show("routes")
     end)
+
+    self.druid:new_button("button_finish/button", function()
+        monarch.show("ride_result")
+    end)
 end
 
 function final(self)

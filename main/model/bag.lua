@@ -2,6 +2,7 @@ local broadcast = require "ludobits.m.broadcast"
 
 local used_bags = {}
 
+-- TODO: add more bags
 local M = {
 	data = {
 		[1] = {

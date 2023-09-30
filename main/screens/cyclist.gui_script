@@ -16,6 +16,7 @@ function init(self)
     self.text_description = self.druid:new_text("text_description", description)
 
     self.druid:new_button("button_back/button", function()
+        -- gui.set_visible(gui.get_node("panel_background"), false)
         monarch.back()
     end)
 
@@ -45,7 +46,4 @@ end
 
 function on_input(self, action_id, action)
     return self.druid:on_input(action_id, action)
-end
-
-function on_reload(self)
 end

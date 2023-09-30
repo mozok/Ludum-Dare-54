@@ -1,12 +1,16 @@
+local broadcast = require "ludobits.m.broadcast"
+local to_the_local_river = require "main.model.route.to_the_local_river"
+
 local M = {}
 
+-- TODO: add more routes
 M.data = {
 	[1] = {
 		index = 1,
 		name = "To the local River",
 		description = "",
 		distance = 40,
-		callback = function() end,
+		callback = to_the_local_river,
 		is_selected = false
 	},
 	[2] = {
@@ -21,6 +25,25 @@ M.data = {
 
 M.selected = 0
 
+local function prepare_data(orig)
+	local orig_type = type(orig)
+	local copy
+	if orig_type == 'table' then
+		copy = {}
+		for orig_key, orig_value in next, orig, nil do
+			if orig_key ~= "callback" then
+				copy[prepare_data(orig_key)] = prepare_data(orig_value)
+			end
+		end
+		setmetatable(copy, prepare_data(getmetatable(orig)))
+	elseif orig_type == 'function' then
+		copy = nil
+	else -- number, string, boolean, etc
+		copy = orig
+	end
+	return copy
+end
+
 function M.select_route(index)
 	for i, route in ipairs(M.data) do
 		route.is_selected = false
@@ -28,6 +51,9 @@ function M.select_route(index)
 
 	M.selected = index
 	M.data[index].is_selected = true
+
+	local route_data = prepare_data(M.data[index])
+	broadcast.send("select_route", { data = route_data })
 end
 
 return M

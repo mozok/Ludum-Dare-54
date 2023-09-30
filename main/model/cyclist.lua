@@ -1,9 +1,4 @@
---[[
-Describe cyclist types.
-Select current cyclist.
-Get current cyclist.
---]]
-
+-- TODO: add more cyclists
 local CYCLISTS = {
 	[1] = {
 		name = "Dave",

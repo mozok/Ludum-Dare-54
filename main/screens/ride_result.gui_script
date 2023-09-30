@@ -1,20 +1,47 @@
 local monarch = require "monarch.monarch"
+local druid = require "druid.druid"
+local route_service = require "main.model.route"
+
+-- TODO: move to separate module 
+local function process_ride(self)
+    local route = route_service.data[route_service.selected]
+    
+end
 
 function init(self)
-    msg.post(".", "acquire_input_focus")
+    gui.set_render_order(12)
+
+    self.druid = druid.new(self)
+
+
+    self.button_back_node = gui.get_node("button_back/button")
+    self.button_next_node = gui.get_node("button_next/button")
+    gui.set_enabled(self.button_next_node, false)
+    gui.set_enabled(self.button_back_node, false)
+    
+    if route_service.selected > 0 then
+        process_ride(self)
+    else
+        gui.set_text(gui.get_node("text_description"), "Select a Route")
+
+        gui.set_enabled(self.button_back_node, true)
+        self.druid:new_button("button_back/button", function()
+            monarch.back()
+        end)
+    end
 end
 
 function final(self)
+    self.druid:final()
 end
 
 function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+    monarch.on_message(message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-end
-
-function on_reload(self)
+    return self.druid:on_input(action_id, action)
 end

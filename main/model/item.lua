@@ -2,6 +2,7 @@ local broadcast = require "ludobits.m.broadcast"
 
 local used_items = {}
 
+-- TODO: add more items 
 local M = {
 	data = {
 		[1] = {
@@ -25,7 +26,9 @@ local function prepare_item_data(orig)
 	if orig_type == 'table' then
 		copy = {}
 		for orig_key, orig_value in next, orig, nil do
-			copy[prepare_item_data(orig_key)] = prepare_item_data(orig_value)
+			if orig_key ~= "callback" then
+				copy[prepare_item_data(orig_key)] = prepare_item_data(orig_value)
+			end
 		end
 		setmetatable(copy, prepare_item_data(getmetatable(orig)))
 	elseif orig_type == 'function' then
