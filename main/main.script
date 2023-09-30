@@ -1,9 +1,17 @@
-local monarch = require("monarch.monarch")
+local monarch = require "monarch.monarch"
+local druid = require "druid.druid"
+local data_list = require "druid.extended.data_list"
+
+local function init_druid(self)
+	druid.register("data_list", data_list)
+end
 
 function init(self)
 	-- msg.post(".", "acquire_input_focus")
 	msg.post("@render:", "clear_color", { color = vmath.vector4(238/255, 195/255, 154/255, 1) })
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
+
+	init_druid(self)
 
 	msg.post("#", "init_monarch")
 end

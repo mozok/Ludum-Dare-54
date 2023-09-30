@@ -5,6 +5,7 @@
 --- And create this component via:
 --- self.bag = self.druid:new(Bag, template, nodes)
 
+local Event = require("druid.event")
 local component = require("druid.component")
 
 ---@class bag: druid.base_component
@@ -22,6 +23,7 @@ local SCHEME = {
 	ICON = "icon",
 	TEXT_NAME = "text_name",
 	TEXT_PRICE = "text_price",
+	TEXT_VOLUME = "text_volume",
 	TEXT_REQUIRE = "text_require",
 	PANEL_CHECKBOX = "panel_checkbox",
 	ICON_CHECKBOX = "icon_checkbox"
@@ -38,39 +40,58 @@ function Bag:init(template, nodes)
 	self.root = self:get_node(SCHEME.ROOT)
 	self.text_name = self.druid:new_text(SCHEME.TEXT_NAME)
 	self.text_price = self.druid:new_text(SCHEME.TEXT_PRICE)
+	self.text_volume = self.druid:new_text(SCHEME.TEXT_VOLUME)
 	self.text_require = self.druid:new_text(SCHEME.TEXT_REQUIRE)
 	self.checkbox = self:get_node(SCHEME.ICON_CHECKBOX)
+	self.icon = self:get_node(SCHEME.ICON)
 
 	self.button = self.druid:new_button(self.root, self._on_click)
 
 	self.on_click = Event()
 end
 
-function ButtonComponent:set_data(data)
+function Bag:set_data(data)
 	self._data = data
-	self.text:set_to("Element: " .. data.value)
-	self:set_checked(self._data.is_checked)
+
+	gui.play_flipbook(self.icon, data.image)
+	
+	self.text_name:set_to(data.name)
+	self.text_price:set_to("Price: " .. data.price)
+	self.text_volume:set_to("Volume: " .. data.volume)
+	if data.require_item then
+		self.text_require:set_to("Require: " .. data.require_item_name)
+		if not data.buy_enabled then
+			gui.play_flipbook(self:get_node(SCHEME.PANEL_CHECKBOX), hash("checkmark_red"))
+		else
+			gui.play_flipbook(self:get_node(SCHEME.PANEL_CHECKBOX), hash("button_frame_green"))
+		end
+	else
+		gui.set_enabled(self:get_node(SCHEME.TEXT_REQUIRE), false)
+	end
+	
+	
+	self:set_checked(self._data.is_used)
 end
 
-function ButtonComponent:get_data()
+function Bag:get_data()
 	return self._data
 end
 
 
-function ButtonComponent:set_checked(state)
+function Bag:set_checked(state)
 	self._data.is_checked = state
 	gui.set_enabled(self.checkbox, state)
 end
 
-function ButtonComponent:set_click_zone(node)
+function Bag:set_click_zone(node)
 	self.button:set_click_zone(node)
 end
 
-function ButtonComponent:on_remove()
+function Bag:on_remove()
 	self.on_click:clear()
 end
 
-function ButtonComponent:_on_click()
+function Bag:_on_click()
 	self.on_click:trigger(self)
 end
 

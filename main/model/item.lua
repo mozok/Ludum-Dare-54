@@ -36,5 +36,8 @@ function M.get_used()
 	return result
 end
 
+function M.get_item(index)
+	return M.data[index]
+end
 
 return M
