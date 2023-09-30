@@ -5,6 +5,8 @@ local route_service = require "main.model.route"
 -- TODO: move to separate module 
 local function process_ride(self)
     local route = route_service.data[route_service.selected]
+
+    local result = route.callback.execute(route.distance)
     
 end
 
