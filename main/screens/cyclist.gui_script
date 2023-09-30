@@ -16,7 +16,7 @@ function init(self)
     self.text_description = self.druid:new_text("text_description", description)
 
     self.druid:new_button("button_back/button", function()
-        -- gui.set_visible(gui.get_node("panel_background"), false)
+        monarch.post("bike", hash("show_routes"))
         monarch.back()
     end)
 

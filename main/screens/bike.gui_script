@@ -1,6 +1,42 @@
 local monarch = require "monarch.monarch"
 local druid = require "druid.druid"
 
+local function init_routes_button(self)
+    if self.routes_enabled then
+        return
+    end
+    self.routes_enabled = true
+
+    gui.animate(gui.get_node("button_routes/button"), "position.x", 100, gui.EASING_LINEAR, 0.5)
+
+    self.druid:new_button("button_routes/button", function()
+        monarch.show("routes")
+    end)
+end
+
+local function init_finish_button(self)
+    if self.finish_enabled then
+        return
+    end
+    self.finish_enabled = true
+
+    gui.animate(gui.get_node("button_bags/button"), "position.x", -100, gui.EASING_LINEAR, 0.5)
+    gui.animate(gui.get_node("button_items/button"), "position.x", -100, gui.EASING_LINEAR, 0.5)
+    gui.animate(gui.get_node("button_finish/button"), "position.y", 50, gui.EASING_LINEAR, 0.5)
+
+    self.druid:new_button("button_bags/button", function()
+        monarch.show("bags")
+    end)
+
+    self.druid:new_button("button_items/button", function()
+        monarch.show("items")
+    end)
+
+    self.druid:new_button("button_finish/button", function()
+        monarch.show("ride_result")
+    end)
+end
+
 function init(self)
     gui.set_render_order(5)
     
@@ -10,25 +46,14 @@ function init(self)
     self.text_weight = gui.get_node("text_weight")
     self.text_cost = gui.get_node("text_cost")
 
+    self.routes_enabled = false
+    self.finish_enabled = false
+
     self.druid:new_button("button_cyclist/button", function()
         monarch.show("cyclist")
     end)
 
-    self.druid:new_button("button_bags/button", function()
-        monarch.show("bags")
-    end)
-
-    self.druid:new_button("button_items/button", function()
-        monarch.show("items")
-    end)
-    
-    self.druid:new_button("button_routes/button", function()
-        monarch.show("routes")
-    end)
-
-    self.druid:new_button("button_finish/button", function()
-        monarch.show("ride_result")
-    end)
+    monarch.on_post("bike", msg.url())
 end
 
 function final(self)
@@ -45,6 +70,10 @@ function on_message(self, message_id, message, sender)
         gui.set_text(self.text_weight, string.format("%s", message.weight))
     elseif message_id == hash("set_cost") then
         gui.set_text(self.text_cost, string.format("%s", message.cost))
+    elseif message_id == hash("show_routes") then
+        init_routes_button(self)
+    elseif message_id == hash("show_finish") then
+        init_finish_button(self)
     end
 end
 

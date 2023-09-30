@@ -53,6 +53,7 @@ function init(self)
     self.data_list:set_data(self.data)
 
     self.druid:new_button("button_ok/button", function()
+        monarch.post("bike", hash("show_finish"))
         monarch.back()
     end)
 
@@ -62,7 +63,7 @@ function init(self)
         .back_in(gui.get_node("W_Anchor"), transitions.slide_in_left, gui.EASING_LINEAR, 0.5, 0)
         .back_out(gui.get_node("W_Anchor"), transitions.slide_out_left, gui.EASING_LINEAR, 0.5, 0)
 
-    monarch.on_transition("items", transition)
+    monarch.on_transition("routes", transition)
 end
 
 function final(self)
