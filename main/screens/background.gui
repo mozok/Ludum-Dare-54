@@ -1,0 +1,2 @@
+script: "/main/screens/background.gui_script"
+adjust_reference: ADJUST_REFERENCE_PARENT
