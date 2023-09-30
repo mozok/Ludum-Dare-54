@@ -1,5 +1,4 @@
 local monarch = require "monarch.monarch"
-local bike = require "main.model.bike"
 local druid = require "druid.druid"
 
 function init(self)
@@ -7,9 +6,9 @@ function init(self)
     
     self.druid = druid.new(self)
 
-    gui.set_text(gui.get_node("text_volume"), string.format("%s/%s", bike.volume, bike.max_volume))
-    gui.set_text(gui.get_node("text_weight"), string.format("%s", bike.weight))
-    gui.set_text(gui.get_node("text_cost"), string.format("%s", bike.cost))
+    self.text_volume = gui.get_node("text_volume")
+    self.text_weight = gui.get_node("text_weight")
+    self.text_cost = gui.get_node("text_cost")
 
     self.druid:new_button("button_cyclist/button", function()
         monarch.show("cyclist")
@@ -28,6 +27,13 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+    if message_id == hash("set_volume") then
+        gui.set_text(self.text_volume, string.format("%s/%s", message.volume, message.max_volume))
+    elseif message_id == hash("set_weight") then
+        gui.set_text(self.text_weight, string.format("%s", message.weight))
+    elseif message_id == hash("set_cost") then
+        gui.set_text(self.text_cost, string.format("%s", message.cost))
+    end
 end
 
 function on_input(self, action_id, action)

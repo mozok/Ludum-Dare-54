@@ -1,3 +1,5 @@
+local broadcast = require "ludobits.m.broadcast"
+
 local used_bags = {}
 
 local M = {
@@ -28,6 +30,8 @@ local M = {
 function M.add_used(index)
 	table.insert(used_bags, index)
 	M.data[index].is_used = false
+
+	broadcast.send("add_bag", { data = M.data[index] })
 end
 
 function M.remove_used(index)
@@ -35,6 +39,7 @@ function M.remove_used(index)
 		if value == index then
 			M.data[index].is_used = false
 			table.remove(used_bags, key)
+			broadcast.send("remove_bag", { data = M.data[index] })
 		end
 	end
 end
