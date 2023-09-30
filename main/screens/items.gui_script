@@ -69,7 +69,6 @@ function init(self)
     self.druid:new_button("button_ok/button", function()
         monarch.back()
     end)
-    
 
     local transition = transitions.create()
         .show_in(gui.get_node("E_Anchor"), transitions.slide_in_right, gui.EASING_LINEAR, 0.5, 0)
