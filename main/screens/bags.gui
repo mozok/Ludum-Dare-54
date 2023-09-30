@@ -513,7 +513,7 @@ nodes {
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  template: "/gui/template/bag.gui"
+  template: "/gui/template/bag_component.gui"
   template_node_child: false
   custom_type: 0
   enabled: true

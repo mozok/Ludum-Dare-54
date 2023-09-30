@@ -29,7 +29,7 @@ local M = {
 
 function M.add_used(index)
 	table.insert(used_bags, index)
-	M.data[index].is_used = false
+	M.data[index].is_used = true
 
 	broadcast.send("add_bag", { data = M.data[index] })
 end
@@ -52,6 +52,10 @@ function M.get_used()
 	end
 
 	return result
+end
+
+function M.get_item(index)
+	return M.data[index]
 end
 
 return M

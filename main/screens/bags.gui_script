@@ -4,7 +4,7 @@ local bag_service = require "main.model.bag"
 local item_service = require "main.model.item"
 
 local druid = require "druid.druid"
-local BagComponent = require "gui.template.bag"
+local BagComponent = require "gui.template.bag_component"
 
 local function on_button_click(self, button)
     -- Since we change data of other records, we need to change raw data and change state of

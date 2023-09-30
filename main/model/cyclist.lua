@@ -7,11 +7,13 @@ Get current cyclist.
 local CYCLISTS = {
 	[1] = {
 		name = "Dave",
-		description = "Hello Mr. CyclingCerviceExpertSir :)\nI want to try some cycling\nfor the first time.",
+		description = "Hello Mr. CyclingCerviceExpertSir :)\nI want to try some cycling\nfor the first time.\nPlease help me =)",
 		experience = 0,
 		money = 0,
 		weight_limit = 0,
 		ride_callback = function() end,
+		fun = 100,
+		endurance = 30
 	},
 }
 

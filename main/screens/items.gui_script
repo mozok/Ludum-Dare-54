@@ -1,20 +1,98 @@
 local monarch = require "monarch.monarch"
+local transitions = require "monarch.transitions.gui"
+local bag_service = require "main.model.bag"
+local item_service = require "main.model.item"
+local bike_service = require "main.model.bike"
+
+local druid = require "druid.druid"
+local ItemComponent = require("gui.template.item_component")
+
+local function on_button_click(self, button)
+    local button_data = button:get_data()
+
+    if button_data.is_used then
+        -- TODO: remove bags dependant on item
+        item_service.remove_used(button_data.index)
+        button_data.is_used = false
+    elseif not bike_service.can_add_item(button_data) then
+        return
+    elseif button_data.require_bag then
+        if button_data.buy_enabled then
+            item_service.add_used(button_data.index)
+            button_data.is_used = true
+        end
+    else
+        item_service.add_used(button_data.index)
+        button_data.is_used = true
+    end
+
+    button:set_checked(button_data.is_used)
+end
+
+local function create_element(self, data)
+    local nodes = gui.clone_tree(self.prefab)
+    -- Create custom component to pass it to DataList
+    local item = self.druid:new(ItemComponent, "item_component", nodes)
+    -- Prefab is disabled, so need to enable it for new component
+    gui.set_enabled(item.root, true)
+    item:set_data(data)
+    item:set_click_zone(self.scroll.view_node)
+    item.on_click:subscribe(on_button_click, self)
+
+    return item.root, item
+end
 
 function init(self)
-    msg.post(".", "acquire_input_focus")
+    gui.set_render_order(12)
+
+    self.druid = druid.new(self)
+
+    self.prefab = gui.get_node("item_component/root")
+    gui.set_enabled(self.prefab, false)
+
+    self.scroll = self.druid:new_scroll("data_list_view", "data_list_content")
+    self.scroll:set_horizontal_scroll(false)
+    self.grid = self.druid:new_static_grid("data_list_content", self.prefab, 1)
+    self.data_list = self.druid:new_data_list(self.scroll, self.grid, create_element)
+
+    self.data = item_service.data
+    for _, item in pairs(self.data) do
+        if item.require_bag then
+            local bag = bag_service.get_item(item.require_bag)
+            item.require_item_name = bag.name
+            item.buy_enabled = bag.is_used
+        end
+    end
+
+    self.data_list:set_data(self.data)
+
+    self.druid:new_button("button_ok/button", function()
+        monarch.back()
+    end)
+    
+
+    local transition = transitions.create()
+        .show_in(gui.get_node("E_Anchor"), transitions.slide_in_right, gui.EASING_LINEAR, 0.5, 0)
+        .show_out(gui.get_node("E_Anchor"), transitions.slide_out_right, gui.EASING_LINEAR, 0.5, 0)
+        .back_in(gui.get_node("E_Anchor"), transitions.slide_in_right, gui.EASING_LINEAR, 0.5, 0)
+        .back_out(gui.get_node("E_Anchor"), transitions.slide_out_right, gui.EASING_LINEAR, 0.5, 0)
+
+    monarch.on_transition("items", transition)
 end
 
 function final(self)
+    self.druid:final()
 end
 
 function update(self, dt)
+    self.druid:update(dt)
 end
 
 function on_message(self, message_id, message, sender)
+    self.druid:on_message(message_id, message, sender)
+    monarch.on_message(message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-end
-
-function on_reload(self)
+    return self.druid:on_input(action_id, action)
 end

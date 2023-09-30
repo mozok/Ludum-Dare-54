@@ -18,4 +18,16 @@ function M.reset_default_values()
 	end
 end
 
+function M.can_add_item(item)
+	if item.volume == 0 then
+		return true
+	end
+
+	if M.volume + item.volume > M.max_volume then
+		return false
+	end
+
+	return true
+end
+
 return M

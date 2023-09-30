@@ -17,6 +17,14 @@ function init(self)
     self.druid:new_button("button_bags/button", function()
         monarch.show("bags")
     end)
+
+    self.druid:new_button("button_items/button", function()
+        monarch.show("items")
+    end)
+    
+    self.druid:new_button("button_routes/button", function()
+        monarch.show("routes")
+    end)
 end
 
 function final(self)

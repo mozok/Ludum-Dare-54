@@ -1,7 +1,7 @@
 --- For component interest functions
 --- see https://github.com/Insality/druid/blob/develop/docs_md/02-creating_custom_components.md
 --- Require this component in you gui file:
---- local Bag = require("gui.template.bag")
+--- local BagComponent = require("gui.template.bag_component")
 --- And create this component via:
 --- self.bag = self.druid:new(Bag, template, nodes)
 
@@ -14,7 +14,7 @@ local component = require("druid.component")
 ---@field text_price druid.text
 ---@field text_require druid.text
 ---@field druid druid_instance
-local Bag = component.create("bag")
+local BagComponent = component.create("bag")
 
 local SCHEME = {
 	ROOT = "root",
@@ -32,7 +32,7 @@ local SCHEME = {
 
 ---@param template string
 ---@param nodes table<hash, node>
-function Bag:init(template, nodes)
+function BagComponent:init(template, nodes)
 	self:set_template(template)
 	self:set_nodes(nodes)
 	self.druid = self:get_druid()
@@ -50,7 +50,7 @@ function Bag:init(template, nodes)
 	self.on_click = Event()
 end
 
-function Bag:set_data(data)
+function BagComponent:set_data(data)
 	self._data = data
 
 	gui.play_flipbook(self.icon, data.image)
@@ -73,26 +73,25 @@ function Bag:set_data(data)
 	self:set_checked(self._data.is_used)
 end
 
-function Bag:get_data()
+function BagComponent:get_data()
 	return self._data
 end
 
-
-function Bag:set_checked(state)
+function BagComponent:set_checked(state)
 	self._data.is_checked = state
 	gui.set_enabled(self.checkbox, state)
 end
 
-function Bag:set_click_zone(node)
+function BagComponent:set_click_zone(node)
 	self.button:set_click_zone(node)
 end
 
-function Bag:on_remove()
+function BagComponent:on_remove()
 	self.on_click:clear()
 end
 
-function Bag:_on_click()
+function BagComponent:_on_click()
 	self.on_click:trigger(self)
 end
 
-return Bag
+return BagComponent
