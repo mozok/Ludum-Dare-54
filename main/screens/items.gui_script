@@ -54,6 +54,8 @@ function init(self)
     self.scroll:set_horizontal_scroll(false)
     self.grid = self.druid:new_static_grid("data_list_content", self.prefab, 1)
     self.data_list = self.druid:new_data_list(self.scroll, self.grid, create_element)
+    self.scroll.style.WHEEL_SCROLL_SPEED = 20
+    self.scroll.style.WHEEL_SCROLL_INVERTED = true
 
     self.data = item_service.data
     for _, item in pairs(self.data) do
