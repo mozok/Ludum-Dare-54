@@ -42,6 +42,10 @@ local function show_all_results(self)
         gui.set_position(text_result, pos)
         gui.set_enabled(text_result, true)
 
+        local icon = result.cyclist.image
+        if result.fun <= 45 then
+            icon = icon .. "_2"
+        end
         gui.play_flipbook(gui.get_node("icon_cyclist"), result.cyclist.image)
         local icon = gui.clone_tree(gui.get_node("icon_frame"))
         local pos = gui.get_position(icon["icon_frame"])
@@ -60,7 +64,12 @@ local function process_ride(self)
     local result = ride_service.execute()
     
     gui.set_enabled(gui.get_node("icon_frame"), true)
-    gui.play_flipbook(gui.get_node("icon_cyclist"), cyclist_service.get_cyclist().image)
+
+    local icon = cyclist_service.get_cyclist().image
+    if result.fun <= 45 then
+        icon = icon .. "_2"
+    end
+    gui.play_flipbook(gui.get_node("icon_cyclist"), icon)
 
     show_stars(self, result)
     gui.set_text(gui.get_node("text_review"), result.review)
