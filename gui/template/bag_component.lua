@@ -97,6 +97,7 @@ function BagComponent:on_remove()
 end
 
 function BagComponent:_on_click()
+	msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_checkbox"))
 	self.on_click:trigger(self)
 end
 
