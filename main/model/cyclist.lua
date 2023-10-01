@@ -7,7 +7,7 @@ local CYCLISTS = {
 		name = "Dave",
 		description = "Hello Mr. CyclingCerviceExpertSir :)\nI want to try some cycling\nfor the first time.\nPlease help me =)",
 		experience = 0,
-		money = 150,
+		money = 130,
 		weight_limit = 20,
 		callback = dave_callback,
 		fun = 100,
@@ -15,7 +15,7 @@ local CYCLISTS = {
 	},
 	[2] = {
 		name = "Patrick",
-		description = "Hey, mate. I want to go for some good ride.\nNeed your professional support.",
+		description = "Hey, mate.\nI want to go for some good ride.\nNeed your professional support.",
 		experience = 100,
 		money = 500,
 		weight_limit = 100,
