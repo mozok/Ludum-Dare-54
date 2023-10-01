@@ -823,7 +823,7 @@ nodes {
 }
 nodes {
   position {
-    x: -4.0
+    x: -55.0
     y: 41.0
     z: 0.0
     w: 1.0
@@ -859,7 +859,7 @@ nodes {
   id: "item_component/text_volume"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 1.0
     y: 1.0
@@ -890,7 +890,7 @@ nodes {
 }
 nodes {
   position {
-    x: -9.0
+    x: -55.0
     y: 15.0
     z: 0.0
     w: 1.0
@@ -926,7 +926,7 @@ nodes {
   id: "item_component/text_price"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 1.0
     y: 1.0
@@ -957,7 +957,7 @@ nodes {
 }
 nodes {
   position {
-    x: -68.0
+    x: 0.0
     y: -82.0
     z: 0.0
     w: 1.0
@@ -975,7 +975,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 250.0
     y: 100.0
     z: 0.0
     w: 1.0
@@ -1024,7 +1024,7 @@ nodes {
 }
 nodes {
   position {
-    x: -45.0
+    x: -25.0
     y: -34.0
     z: 0.0
     w: 1.0
@@ -1042,7 +1042,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 240.0
     y: 100.0
     z: 0.0
     w: 1.0
@@ -1262,7 +1262,7 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_AUTO
   custom_type: 0
-  enabled: true
+  enabled: false
   visible: true
   material: ""
 }
