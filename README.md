@@ -12,6 +12,9 @@ Fully developed during Ludum Dare 54 in 48 hours by [@mozokevgen](https://twitte
 [Ludum Dare Entry](https://ldjam.com/events/ludum-dare/54/bikepacking-planner)
 
 Engine: [Defold](https://defold.com/)
+
 Graphics made in Aseprite.
+
 Sound effects made in SFXR.
+
 Music recorded during GameJam.
