@@ -15,6 +15,8 @@ function init(self)
     local description = string.format("\"%s\"", cyclist.description)
     self.text_description = self.druid:new_text("text_description", description)
 
+    gui.play_flipbook(gui.get_node("icon_cyclist"), cyclist.image)
+
     self.druid:new_button("button_back/button", function()
         monarch.post("bike", hash("show_routes"))
         msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_select"))

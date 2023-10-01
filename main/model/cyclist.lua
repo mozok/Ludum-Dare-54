@@ -6,6 +6,7 @@ local CYCLISTS = {
 	[1] = {
 		name = "Dave",
 		description = "Hello Mr. CyclingCerviceExpertSir :)\nI want to try some cycling\nfor the first time.\nPlease help me =)",
+		image = hash("cyclist1"),
 		experience = 0,
 		money = 130,
 		weight_limit = 20,
@@ -16,6 +17,7 @@ local CYCLISTS = {
 	[2] = {
 		name = "Patrick",
 		description = "Hey, mate.\nI want to go for some good ride.\nNeed your professional support.",
+		image = hash("cyclist2"),
 		experience = 100,
 		money = 500,
 		weight_limit = 100,
@@ -25,7 +27,7 @@ local CYCLISTS = {
 	}
 }
 
-local cyclist_index = 2
+local cyclist_index = 1
 
 local M = {}
 
