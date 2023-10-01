@@ -39,6 +39,7 @@ function M.execute()
 	local stamina = cyclist.stamina
 	M.result_fun = cyclist.fun
 	cyclist.callback.set_base_stamina(stamina)
+	cyclist.callback.set_money_limit(cyclist.money)
 
 	local route = route_service.data[route_service.selected]
 
@@ -103,9 +104,13 @@ function M.execute()
 	-- TODO: add route random event
 
 	-- TODO: check ride cost
+	if bike_service.cost > cyclist.money then
+		M.result_fun = M.result_fun - 10
+	end
+	M.review = M.review .. "\n" .. cyclist.callback.check_ride_cost(bike_service.cost)
 
 	-- epilogue
-	M.review = M.review .. "\n" .. cyclist.callback.finish_review(M.result_fun)
+	M.review = M.review .. "\n" .. cyclist.callback.finish_review(stamina, M.result_fun)
 
 	return { fun = M.result_fun, review = M.review }
 end

@@ -71,7 +71,7 @@ local function add_item(self, data)
 end
 
 local function remove_item(self, data)
-	if go.exists(data.position) then
+	if data.type == "mount-point" and go.exists(data.position) then
 		msg.post(data.position, "disable")
 	end
 

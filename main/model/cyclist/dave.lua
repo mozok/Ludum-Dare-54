@@ -21,15 +21,19 @@ function M.set_base_stamina(value)
 	M.base_stamina = value
 end
 
+function M.set_money_limit(amount)
+	M.money = amount
+end
+
 function M.distance_review(stamina)
 	local result = ''
 	
 	if stamina == 0 then
 		M.distance_ok = true
-		result = "First Ride in my life almost failed :)"
+		result = "First Ride in my life was hard :)"
 		
 		if M.energetic_used then
-			result = result .. "\nEnergetic supply saved me!"
+			result = result .. "\nBut Energetic supply saved me!"
 		end
 	elseif stamina > 0 then
 		M.distance_ok = true
@@ -127,7 +131,17 @@ function M.weight_review(stamina)
 	return result
 end
 
-function M.finish_review(fun)
+function M.check_ride_cost(cost)
+	local result = ""
+
+	if cost > M.money then
+		result = result .. "For such a HUGE price tag!"
+	end
+
+	return result
+end
+
+function M.finish_review(stamina, fun)
 	local result = ""
 	
 	if fun > 90 then

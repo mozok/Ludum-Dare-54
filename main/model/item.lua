@@ -32,7 +32,7 @@ local M = {
 			require_bag = false,
 		},
 		[3] = {
-			index = 2,
+			index = 3,
 			type = "energetic",
 			name = "Snack",
 			image = hash("snack"),
@@ -45,7 +45,7 @@ local M = {
 			require_bag = false,
 		},
 		[4] = {
-			index = 2,
+			index = 4,
 			type = "sleep",
 			name = "Tent",
 			image = hash("tent"),
