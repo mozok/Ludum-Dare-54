@@ -75,7 +75,7 @@ function M.eat_review(stamina, data)
 		data.eat_ok = true
 
 		if data.has_food then
-			result = result .. "This meal was pretty good."
+			result = result .. "The meal was pretty good."
 		end
 	else
 		data.eat_ok = false
