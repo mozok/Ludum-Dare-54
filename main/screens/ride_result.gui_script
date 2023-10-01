@@ -88,19 +88,43 @@ local function process_ride(self)
     end)
 end
 
+local function process_loader(self)
+    gui.set_enabled(gui.get_node("icon_frame"), false)
+    gui.set_enabled(gui.get_node("panel_stars"), false)
+    gui.set_enabled(gui.get_node("text_result"), false)
+    
+    gui.set_position(gui.get_node("icon_bicyle"), vmath.vector3(-200, 0, 0))
+    gui.set_size(gui.get_node("icon_loader"), vmath.vector3(16, 16, 0))
+
+    gui.set_enabled(self.panel_loader, true)
+
+    gui.animate(gui.get_node("icon_bicyle"), "position.x", 200, gui.EASING_INSINE, 1.1)
+    gui.animate(gui.get_node("icon_loader"), "size.x", 420, gui.EASING_INSINE, 1.1, 0, function()
+        gui.set_enabled(self.panel_loader, false)
+
+        gui.set_enabled(gui.get_node("icon_frame"), true)
+        gui.set_enabled(gui.get_node("panel_stars"), true)
+        gui.set_enabled(gui.get_node("text_result"), true)
+        
+        process_ride(self)
+    end)
+end
+
 function init(self)
     gui.set_render_order(12)
 
     self.druid = druid.new(self)
 
-
     self.button_back_node = gui.get_node("button_back/button")
     self.button_next_node = gui.get_node("button_next/button")
     gui.set_enabled(self.button_next_node, false)
     gui.set_enabled(self.button_back_node, false)
+
+    self.panel_loader = gui.get_node("panel_loader")
+    gui.set_enabled(self.panel_loader, false)
     
     if route_service.selected > 0 then
-        process_ride(self)
+        process_loader(self)
     else
         gui.set_enabled(gui.get_node("icon_frame"), false)
         gui.set_enabled(gui.get_node("panel_stars"), false)
