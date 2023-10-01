@@ -15,7 +15,8 @@ local M = {
 			volume = 0,
 			callback = function() end,
 			is_used = false,
-			require_bag = false
+			require_bag = false,
+			type = "mount-point"
 		}
 	}
 }

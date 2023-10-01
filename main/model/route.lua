@@ -8,10 +8,12 @@ M.data = {
 	[1] = {
 		index = 1,
 		name = "To the local River",
-		description = "",
+		description = "One day casual ride.\nWith light meal or snacks.",
 		distance = 40,
 		callback = to_the_local_river,
-		is_selected = false
+		is_selected = false,
+		night = false,
+		eat = 1
 	},
 	[2] = {
 		index = 2,
@@ -19,7 +21,9 @@ M.data = {
 		description = "",
 		distance = 200,
 		callback = function() end,
-		is_selected = false
+		is_selected = false,
+		night = false,
+		eat = 2
 	}
 }
 
