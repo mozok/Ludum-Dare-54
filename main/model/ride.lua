@@ -112,9 +112,8 @@ function M.execute()
 			M.data.result_fun = M.data.result_fun - 20
 			M.data.has_food = false
 		end
-
-		M.data.review = M.data.review .. "\n" .. cyclist.callback.eat_review(stamina, M.data)
 	end
+	M.data.review = M.data.review .. "\n" .. cyclist.callback.eat_review(stamina, M.data)
 
 	-- check ride weight
 	if bike_service.weight > cyclist.weight_limit then

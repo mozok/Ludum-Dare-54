@@ -83,6 +83,7 @@ function M.eat_review(stamina, data)
 			result = result .. "I ate but remained hungry :_("
 		else
 			result = result .. "I was starving WITHOUT a food!"
+			data.result_fun = data.result_fun - 20
 		end
 	end
 
@@ -119,6 +120,9 @@ function M.check_ride_cost(cost, data)
 
 	if cost > data.money then
 		result = result .. "For such a HUGE price tag!"
+		if cost > data.money * 2 then
+			data.result_fun = data.result_fun - 20
+		end
 	end
 
 	return result
