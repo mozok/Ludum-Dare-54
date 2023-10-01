@@ -4,10 +4,33 @@ local route_service = require "main.model.route"
 local ride_service = require "main.model.ride"
 local cyclist_service = require "main.model.cyclist"
 
--- TODO: move to separate module 
+local function show_stars(self, result)
+    local rating = tonumber(string.format("%.1f", (result.fun * 5) / 100))
+    if rating < 0 then
+        rating = 0
+    end
+
+    for i = 1, 5 do
+        if i <= rating then
+            gui.play_flipbook(gui.get_node("icon_star" .. i), hash("star"))
+        elseif rating < i and rating > i - 1 then
+            gui.play_flipbook(gui.get_node("icon_star" .. i), hash("star_half"))
+        else
+            gui.play_flipbook(gui.get_node("icon_star" .. i), hash("star_empty"))
+        end
+    end
+
+    gui.set_text(gui.get_node("text_result"), string.format("%s/5", rating))
+end
+
+-- TODO: show all cyclist on final screen
 local function process_ride(self)
     local result = ride_service.execute()
-    gui.set_text(gui.get_node("text_result"), string.format("%s/100", result.fun))
+    
+    gui.set_enabled(gui.get_node("icon_frame"), true)
+    gui.play_flipbook(gui.get_node("icon_cyclist"), cyclist_service.get_cyclist().image)
+
+    show_stars(self, result)
     gui.set_text(gui.get_node("text_review"), result.review)
 
     local next = cyclist_service.next_cyclist()
@@ -19,6 +42,9 @@ local function process_ride(self)
             monarch.post("bike", hash("reset_bike"))
             monarch.back()
         else
+            gui.set_enabled(gui.get_node("icon_frame"), false)
+            gui.set_enabled(gui.get_node("panel_stars"), false)
+
             gui.set_text(gui.get_node("text_result"), "")
             gui.set_text(gui.get_node("text_review"), "That was the last rider!\nThank you for playing :)")
         end
@@ -39,6 +65,9 @@ function init(self)
     if route_service.selected > 0 then
         process_ride(self)
     else
+        gui.set_enabled(gui.get_node("icon_frame"), false)
+        gui.set_enabled(gui.get_node("panel_stars"), false)
+
         gui.set_text(gui.get_node("text_result"), "")
         gui.set_text(gui.get_node("text_review"), "Select a Route")
 
