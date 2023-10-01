@@ -2,11 +2,12 @@ local broadcast = require "ludobits.m.broadcast"
 
 local used_items = {}
 
--- TODO: add more items 
+-- TODO: add more items
 local M = {
 	data = {
 		[1] = {
 			index = 1,
+			type = "mount-point",
 			name = "Rear Rack",
 			image = hash("rack"),
 			position = "rack-rear",
@@ -16,7 +17,45 @@ local M = {
 			callback = function() end,
 			is_used = false,
 			require_bag = false,
-			type = "mount-point"
+		},
+		[2] = {
+			index = 2,
+			type = "food",
+			name = "Sandwich",
+			image = hash("sandwich"),
+			position = false,
+			description = "",
+			price = 10,
+			volume = 2,
+			callback = function() end,
+			is_used = false,
+			require_bag = false,
+		},
+		[3] = {
+			index = 2,
+			type = "energetic",
+			name = "Snack",
+			image = hash("snack"),
+			position = false,
+			description = "",
+			price = 15,
+			volume = 1,
+			callback = function() end,
+			is_used = false,
+			require_bag = false,
+		},
+		[4] = {
+			index = 2,
+			type = "sleep",
+			name = "Tent",
+			image = hash("tent"),
+			position = false,
+			description = "",
+			price = 15,
+			volume = 5,
+			callback = function() end,
+			is_used = false,
+			require_bag = false,
 		}
 	}
 }
@@ -72,6 +111,12 @@ end
 
 function M.get_item(index)
 	return M.data[index]
+end
+
+function M.reset()
+	for key, value in ipairs(used_items) do
+		M.remove_used(value)
+	end
 end
 
 return M
