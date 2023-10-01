@@ -5,7 +5,7 @@ local item_service = require "main.model.item"
 local bag_service = require "main.model.bag"
 local monarch = require "monarch.monarch"
 
-local all_bag_ids = { "/frame", "/rear-rack" }
+local all_bag_ids = { "/frame", "/rear-rack", "/stem", "/handlebar", "/seat" }
 local all_mounted_id = { "/rack-rear" }
 
 local function disable_objects(object_list)
