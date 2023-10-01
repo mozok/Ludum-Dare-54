@@ -23,6 +23,38 @@ local function show_stars(self, result)
     gui.set_text(gui.get_node("text_result"), string.format("%s/5", rating))
 end
 
+local function show_all_results(self)
+    gui.set_enabled(gui.get_node("icon_frame"), false)
+    gui.set_enabled(gui.get_node("panel_stars"), false)
+    
+
+    for index, result in pairs(ride_service.results) do
+        show_stars(self, result)
+        local stars = gui.clone_tree(gui.get_node("panel_stars"))
+        local pos = gui.get_position(stars["panel_stars"])
+        pos.y = pos.y - 90 * (index - 1)
+        gui.set_position(stars["panel_stars"], pos)
+        gui.set_enabled(stars["panel_stars"], true)
+
+        local text_result = gui.clone(gui.get_node("text_result"))
+        local pos = gui.get_position(text_result)
+        pos.y = pos.y - 90 * (index - 1)
+        gui.set_position(text_result, pos)
+        gui.set_enabled(text_result, true)
+
+        gui.play_flipbook(gui.get_node("icon_cyclist"), result.cyclist.image)
+        local icon = gui.clone_tree(gui.get_node("icon_frame"))
+        local pos = gui.get_position(icon["icon_frame"])
+        pos.y = pos.y - 90 * (index - 1)
+        gui.set_position(icon["icon_frame"], pos)
+        gui.set_enabled(icon["icon_frame"], true)
+    end
+
+    gui.set_text(gui.get_node("text_result"), "")
+    gui.set_text(gui.get_node("text_review"), "That was the last rider!\nThank you for playing :)")
+    gui.set_enabled(self.button_next_node, false)
+end
+
 -- TODO: show all cyclist on final screen
 local function process_ride(self)
     local result = ride_service.execute()
@@ -42,11 +74,7 @@ local function process_ride(self)
             monarch.post("bike", hash("reset_bike"))
             monarch.back()
         else
-            gui.set_enabled(gui.get_node("icon_frame"), false)
-            gui.set_enabled(gui.get_node("panel_stars"), false)
-
-            gui.set_text(gui.get_node("text_result"), "")
-            gui.set_text(gui.get_node("text_review"), "That was the last rider!\nThank you for playing :)")
+            show_all_results(self)
         end
     end)
 end

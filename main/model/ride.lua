@@ -5,6 +5,7 @@ local cyclist_service = require "main.model.cyclist"
 
 local M = {
 	data = {},
+	results = {}
 }
 
 local function check_type(items, type)
@@ -135,7 +136,10 @@ function M.execute()
 	-- epilogue
 	M.data.review = M.data.review .. "\n" .. cyclist.callback.finish_review(stamina, M.data)
 
-	return { fun = M.data.result_fun, review = M.data.review }
+	local result = { fun = M.data.result_fun, review = M.data.review, cyclist = { image = cyclist.image } }
+	table.insert(M.results, result)
+	
+	return result
 end
 
 return M
