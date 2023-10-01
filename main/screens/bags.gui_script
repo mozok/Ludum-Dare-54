@@ -6,6 +6,18 @@ local item_service = require "main.model.item"
 local druid = require "druid.druid"
 local BagComponent = require "gui.template.bag_component"
 
+local function add_bag(button, button_data)
+    for _, bags_used in ipairs(bag_service.get_used()) do
+        if button_data.position == bags_used.position then
+            button:set_message("Position already used.\nRemove " .. bags_used.name)
+            return
+        end
+    end
+    
+    bag_service.add_used(button_data.index)
+    button_data.is_used = true
+end
+
 local function on_button_click(self, button)
     -- Since we change data of other records, we need to change raw data and change state of
     -- created components
@@ -29,16 +41,12 @@ local function on_button_click(self, button)
         button_data.is_used = false
     elseif button_data.require_item then
         if button_data.buy_enabled then
-            bag_service.add_used(button_data.index)
-            button_data.is_used = true
+            add_bag(button, button_data)
         end
     else
-        bag_service.add_used(button_data.index)
-        button_data.is_used = true
+        add_bag(button, button_data)
     end
 
-
-    
     button:set_checked(button_data.is_used)
 end
 

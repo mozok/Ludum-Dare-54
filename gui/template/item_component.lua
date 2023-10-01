@@ -113,7 +113,7 @@ function ItemComponent:set_message(text)
 	gui.set_color(self.panel_message, color)
 	gui.set_enabled(self.panel_message, true)
 
-	gui.animate(self.panel_message, "color.w", 0, gui.EASING_OUTSINE, 1.5, 0, function()
+	gui.animate(self.panel_message, "color.w", 0, gui.EASING_INSINE, 2, 0, function()
 		gui.set_enabled(self.panel_message, false)
 	end)
 end

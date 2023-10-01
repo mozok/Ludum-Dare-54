@@ -26,7 +26,9 @@ local SCHEME = {
 	TEXT_VOLUME = "text_volume",
 	TEXT_REQUIRE = "text_require",
 	PANEL_CHECKBOX = "panel_checkbox",
-	ICON_CHECKBOX = "icon_checkbox"
+	ICON_CHECKBOX = "icon_checkbox",
+	PANEL_MESSAGE = "panel_message",
+	TEXT_MESSAGE = "text_message"
 }
 
 
@@ -44,6 +46,10 @@ function BagComponent:init(template, nodes)
 	self.text_require = self.druid:new_text(SCHEME.TEXT_REQUIRE)
 	self.checkbox = self:get_node(SCHEME.ICON_CHECKBOX)
 	self.icon = self:get_node(SCHEME.ICON)
+	self.panel_message = self:get_node(SCHEME.PANEL_MESSAGE)
+	self.text_message = self:get_node(SCHEME.TEXT_MESSAGE)
+
+	gui.set_enabled(self.panel_message, false)
 
 	self.button = self.druid:new_button(self.root, self._on_click)
 
@@ -92,6 +98,19 @@ end
 
 function BagComponent:_on_click()
 	self.on_click:trigger(self)
+end
+
+function BagComponent:set_message(text)
+	gui.set_text(self.text_message, text)
+
+	local color = gui.get_color(self.panel_message)
+	color.w = 1
+	gui.set_color(self.panel_message, color)
+	gui.set_enabled(self.panel_message, true)
+
+	gui.animate(self.panel_message, "color.w", 0, gui.EASING_INSINE, 2, 0, function()
+		gui.set_enabled(self.panel_message, false)
+	end)
 end
 
 return BagComponent
