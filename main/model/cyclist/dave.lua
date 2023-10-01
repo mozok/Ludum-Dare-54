@@ -36,6 +36,14 @@ end
 function M.night_review(stamina, data)
 	local result = ''
 
+	if not data.night_event and data.night_equip then
+		return result .. "For what did I had this tent??"
+	end
+
+	if not data.night_event then
+		return result
+	end
+	
 	if stamina >= 0 then
 		data.night_ok = true
 		

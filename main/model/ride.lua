@@ -84,10 +84,11 @@ function M.execute()
 	M.data.review = M.data.review .. cyclist.callback.distance_review(stamina, M.data)
 
 	-- check route sleepping
+	M.data.night_equip = check_night(items)
 	if route.night then
 		M.data.night_event = true
 		
-		if check_night(items) then
+		if M.data.night_equip then
 			stamina = stamina + 10 -- TODO: add dinamic rest
 			M.data.night_equip = true
 		else
@@ -95,9 +96,8 @@ function M.execute()
 			M.data.result_fun = M.data.result_fun - 20
 			M.data.night_equip = false
 		end
-
-		M.data.review = M.data.review .. "\n" .. cyclist.callback.night_review(stamina, M.data)
 	end
+	M.data.review = M.data.review .. "\n" .. cyclist.callback.night_review(stamina, M.data)
 
 	-- check route eating
 	if route.eat > 0 then

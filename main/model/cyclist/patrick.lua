@@ -35,6 +35,15 @@ end
 function M.night_review(stamina, data)
 	local result = ""
 
+	if not data.night_event and data.night_equip then
+		data.result_fun = data.result_fun - 5
+		return result .. "I'm here to ride, not to sleep :)"
+	end
+
+	if not data.night_event then
+		return result
+	end
+
 	if stamina >= 0 then
 		data.night_ok = true
 
