@@ -41,6 +41,7 @@ function RouteComponent:init(template, nodes)
 	self.text_distance = self.druid:new_text(SCHEME.TEXT_DISTANCE)
 	self.text_description = self.druid:new_text(SCHEME.TEXT_DESCRIPTION)
 	self.checkbox = self:get_node(SCHEME.ICON_CHECKBOX)
+	self.icon = self:get_node(SCHEME.ICON)
 
 	self.button = self.druid:new_button(self.root, self._on_click)
 
@@ -50,7 +51,7 @@ end
 function RouteComponent:set_data(data)
 	self._data = data
 
-	-- gui.play_flipbook(self.icon, data.image)
+	gui.play_flipbook(self.icon, data.image)
 
 	self.text_name:set_to(data.name)
 	self.text_distance:set_to("Distance: " .. data.distance)

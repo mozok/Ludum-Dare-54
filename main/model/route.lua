@@ -8,7 +8,8 @@ M.data = {
 	[1] = {
 		index = 1,
 		name = "To the local River",
-		description = "One day casual ride.\nWith light meal or snacks.",
+		description = "One day casual ride.\nWith light meal\nor snacks.",
+		image = hash("green"),
 		distance = 40,
 		callback = to_the_local_river,
 		is_selected = false,
@@ -17,13 +18,25 @@ M.data = {
 	},
 	[2] = {
 		index = 2,
+		name = "Two days in the woods",
+		description = "Mediun trip\nto local woods.\nTwo days with nature\nand nice view.",
+		image = hash("yellow"),
+		distance = 100,
+		callback = function() end,
+		is_selected = false,
+		night = true,
+		eat = 2
+	},
+	[3] = {
+		index = 3,
 		name = "Race",
-		description = "Difficult Ride in Race mode.\nNot for beginners.",
+		description = "Difficult Ride\nin Race mode.\nNot for beginners.",
+		image = hash("checkmark_red"),
 		distance = 200,
 		callback = function() end,
 		is_selected = false,
 		night = false,
-		eat = 2
+		eat = 1
 	}
 }
 

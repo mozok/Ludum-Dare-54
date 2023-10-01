@@ -301,8 +301,8 @@ nodes {
 }
 nodes {
   position {
-    x: 200.0
-    y: 200.0
+    x: 175.0
+    y: 225.0
     z: 0.0
     w: 1.0
   }
@@ -319,8 +319,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 400.0
-    y: 400.0
+    x: 350.0
+    y: 450.0
     z: 0.0
     w: 1.0
   }
@@ -378,8 +378,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 400.0
-    y: 400.0
+    x: 350.0
+    y: 450.0
     z: 0.0
     w: 1.0
   }
@@ -419,7 +419,7 @@ nodes {
 }
 nodes {
   position {
-    x: 190.0
+    x: 175.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -662,14 +662,14 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.0
-    y: 0.502
-    z: 0.0
+    x: 1.0
+    y: 1.0
+    z: 1.0
     w: 1.0
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "game/green"
   id: "route_component/icon"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -764,7 +764,7 @@ nodes {
 }
 nodes {
   position {
-    x: -4.0
+    x: -55.0
     y: 41.0
     z: 0.0
     w: 1.0
@@ -800,7 +800,7 @@ nodes {
   id: "route_component/text_distance"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 1.0
     y: 1.0
@@ -831,8 +831,8 @@ nodes {
 }
 nodes {
   position {
-    x: -45.0
-    y: -34.0
+    x: -144.0
+    y: -41.0
     z: 0.0
     w: 1.0
   }
@@ -849,7 +849,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 240.0
     y: 100.0
     z: 0.0
     w: 1.0
@@ -867,7 +867,7 @@ nodes {
   id: "route_component/text_description"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 1.0
     y: 1.0
@@ -1016,8 +1016,8 @@ nodes {
 }
 nodes {
   position {
-    x: 299.0
-    y: -251.0
+    x: 250.0
+    y: -267.0
     z: 0.0
     w: 1.0
   }
