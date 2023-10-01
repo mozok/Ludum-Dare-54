@@ -2,14 +2,26 @@ local monarch = require "monarch.monarch"
 local druid = require "druid.druid"
 local route_service = require "main.model.route"
 local ride_service = require "main.model.ride"
+local cyclist_service = require "main.model.cyclist"
 
 -- TODO: move to separate module 
 local function process_ride(self)
-    -- local route = route_service.data[route_service.selected]
-
     local result = ride_service.execute()
     gui.set_text(gui.get_node("text_result"), string.format("%s/100", result.fun))
     gui.set_text(gui.get_node("text_review"), result.review)
+
+    local next = cyclist_service.next_cyclist()
+
+    gui.set_enabled(self.button_next_node, true)
+    self.druid:new_button("button_next/button", function()
+        if next then
+            monarch.post("bike", hash("reset_bike"))
+            monarch.back()
+        else
+            gui.set_text(gui.get_node("text_result"), "")
+            gui.set_text(gui.get_node("text_review"), "That was the last customer!\nThank you for playing :)")
+        end
+    end)
 end
 
 function init(self)

@@ -74,6 +74,8 @@ function on_message(self, message_id, message, sender)
         init_routes_button(self)
     elseif message_id == hash("show_finish") then
         init_finish_button(self)
+    elseif message_id == hash("reset_bike") then
+        msg.post("/bike#bike_controller", hash("reset_bike"))
     end
 end
 

@@ -59,4 +59,10 @@ function M.get_item(index)
 	return M.data[index]
 end
 
+function M.reset()
+	for key, value in ipairs(used_bags) do
+		M.remove_used(value)
+	end
+end
+
 return M

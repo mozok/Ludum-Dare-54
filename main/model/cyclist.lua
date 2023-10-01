@@ -1,4 +1,5 @@
 local dave_callback = require "main.model.cyclist.dave"
+local patrick_callback = require "main.model.cyclist.patrick"
 
 -- TODO: add more cyclists
 local CYCLISTS = {
@@ -12,6 +13,16 @@ local CYCLISTS = {
 		fun = 100,
 		stamina = 30
 	},
+	[2] = {
+		name = "Patrick",
+		description = "Hey, mate. I want to go for some good ride.\nNeed your professional support.",
+		experience = 100,
+		money = 500,
+		weight_limit = 100,
+		callback = patrick_callback,
+		fun = 100,
+		stamina = 200
+	}
 }
 
 local cyclist_index = 1

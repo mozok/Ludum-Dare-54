@@ -54,10 +54,12 @@ function M.select_route(index)
 	end
 
 	M.selected = index
-	M.data[index].is_selected = true
+	if index > 0 then
+		M.data[index].is_selected = true
 
-	local route_data = prepare_data(M.data[index])
-	broadcast.send("select_route", { data = route_data })
+		local route_data = prepare_data(M.data[index])
+		broadcast.send("select_route", { data = route_data })
+	end
 end
 
 return M
