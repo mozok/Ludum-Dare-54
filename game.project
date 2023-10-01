@@ -1,5 +1,5 @@
 [project]
-title = LudumDare54
+title = Bikepacking Planner
 dependencies#0 = https://github.com/britzl/monarch/archive/master.zip
 dependencies#1 = https://github.com/Insality/druid/archive/refs/tags/0.11.0.zip
 dependencies#2 = https://github.com/britzl/ludobits/archive/master.zip
