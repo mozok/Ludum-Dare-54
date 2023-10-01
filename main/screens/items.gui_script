@@ -7,17 +7,28 @@ local bike_service = require "main.model.bike"
 local druid = require "druid.druid"
 local ItemComponent = require("gui.template.item_component")
 
-local function on_hover(self, button)
-    print("on hover")
+local function is_bag_used(self, item_data)
+    for _, bag in pairs(bag_service.get_used()) do
+        if bag.require_item and bag.require_item == item_data.index then
+            return bag.name
+        end
+    end
+
+    return false
 end
+
 
 local function on_button_click(self, button)
     local button_data = button:get_data()
 
     if button_data.is_used then
-        -- TODO: remove bags dependant on item
-        item_service.remove_used(button_data.index)
-        button_data.is_used = false
+        local bag = is_bag_used(self, button_data)
+        if bag then
+            button:set_message("Remove bag first:\n" .. bag)
+        else
+            item_service.remove_used(button_data.index)
+            button_data.is_used = false
+        end
     elseif not bike_service.can_add_item(button_data) then
         button:set_message("Not enough Volume.\nInstall bag.")
         return

@@ -1209,7 +1209,7 @@ nodes {
 }
 nodes {
   position {
-    x: -50.0
+    x: -25.0
     y: -50.0
     z: 0.0
     w: 1.0
@@ -1227,7 +1227,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 250.0
     y: 100.0
     z: 0.0
     w: 1.0
@@ -1260,7 +1260,7 @@ nodes {
   clipping_inverted: false
   alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_AUTO
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
   enabled: false
   visible: true
@@ -1286,7 +1286,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 250.0
     y: 100.0
     z: 0.0
     w: 1.0
