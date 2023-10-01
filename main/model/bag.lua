@@ -25,6 +25,56 @@ local M = {
 			position = "rear-rack",
 			is_used = false
 		},
+		[3] = {
+			index = 3,
+			name = "Stem Bag",
+			volume = 2,
+			require_item = false,
+			price = 60,
+			image = hash("feeder"),
+			position = "stem",
+			is_used = false
+		},
+		[4] = {
+			index = 4,
+			name = "Handlebar Roll",
+			volume = 5,
+			require_item = false,
+			price = 100,
+			image = hash("handlebarbag"),
+			position = "handlebar",
+			is_used = false
+		},
+		[5] = {
+			index = 5,
+			name = "Seat Pack",
+			volume = 5,
+			require_item = false,
+			price = 120,
+			image = hash("sadlebag"),
+			position = "seat",
+			is_used = false
+		},
+		[6] = {
+			index = 6,
+			name = "Framebag Big",
+			volume = 6,
+			require_item = false,
+			price = 150,
+			image = hash("framebag1"),
+			position = "frame",
+			is_used = false
+		},
+		[7] = {
+			index = 7,
+			name = "Rear Panniers",
+			volume = 60,
+			require_item = 1,
+			price = 400,
+			image = hash("pennybag"),
+			position = "rear-rack",
+			is_used = false
+		},
 	}
 }
 
