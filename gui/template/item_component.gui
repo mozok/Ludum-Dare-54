@@ -518,7 +518,7 @@ nodes {
 }
 nodes {
   position {
-    x: -25.0
+    x: -135.0
     y: -34.0
     z: 0.0
     w: 1.0
@@ -536,7 +536,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 240.0
+    x: 220.0
     y: 100.0
     z: 0.0
     w: 1.0
@@ -554,7 +554,7 @@ nodes {
   id: "text_description"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 1.0
     y: 1.0
