@@ -86,14 +86,11 @@ local function reset_bike(self)
 	route_service.select_route(0)
 	item_service.reset()
 	bag_service.reset()
-	-- bike_service.reset_default_values()
 
 	disable_objects(all_bag_ids)
 	disable_objects(all_mounted_id)
 
-	msg.post("/go#monarch", hash("set_volume"), { volume = bike_service.volume, max_volume = bike_service.max_volume })
-	msg.post("/go#monarch", hash("set_cost"), { cost = bike_service.cost })
-	msg.post("/go#monarch", hash("set_weight"), { weight = bike_service.weight })
+	msg.post("#", hash("reset_bike_defaults"))
 
 	monarch.show("cyclist")
 end
@@ -109,6 +106,11 @@ function on_message(self, message_id, message, sender)
 		remove_item(self, message.data)
 	elseif message_id == hash("reset_bike") then
 		reset_bike(self)
+	elseif message_id == hash("reset_bike_defaults") then
+		bike_service.reset_default_values()
+		msg.post("/go#monarch", hash("set_volume"), { volume = bike_service.volume, max_volume = bike_service.max_volume })
+		msg.post("/go#monarch", hash("set_cost"), { cost = bike_service.cost })
+		msg.post("/go#monarch", hash("set_weight"), { weight = bike_service.weight })
 	end
 end
 
