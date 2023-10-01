@@ -21,11 +21,11 @@ local CYCLISTS = {
 		weight_limit = 100,
 		callback = patrick_callback,
 		fun = 100,
-		stamina = 200
+		stamina = 190
 	}
 }
 
-local cyclist_index = 1
+local cyclist_index = 2
 
 local M = {}
 

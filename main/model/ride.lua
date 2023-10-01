@@ -62,6 +62,7 @@ function M.execute()
 	M.data.result_fun = cyclist.fun
 	M.data.base_stamina = stamina
 	M.data.money = cyclist.money
+	M.data.experience = cyclist.experience
 
 	local route = route_service.data[route_service.selected]
 

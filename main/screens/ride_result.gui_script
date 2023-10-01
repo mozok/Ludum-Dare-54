@@ -19,7 +19,7 @@ local function process_ride(self)
             monarch.back()
         else
             gui.set_text(gui.get_node("text_result"), "")
-            gui.set_text(gui.get_node("text_review"), "That was the last customer!\nThank you for playing :)")
+            gui.set_text(gui.get_node("text_review"), "That was the last rider!\nThank you for playing :)")
         end
     end)
 end
