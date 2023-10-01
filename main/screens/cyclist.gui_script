@@ -17,6 +17,7 @@ function init(self)
 
     self.druid:new_button("button_back/button", function()
         monarch.post("bike", hash("show_routes"))
+        msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_select"))
         monarch.back()
     end)
 
@@ -31,6 +32,8 @@ function init(self)
         .back_out(gui.get_node("root"), transitions.fade_out, gui.EASING_LINEAR, 0.3, 0)
 
     monarch.on_transition("cyclist", transition)
+    
+    msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_open"))
 end
 
 function final(self)

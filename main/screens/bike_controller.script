@@ -111,6 +111,12 @@ function on_message(self, message_id, message, sender)
 		msg.post("/go#monarch", hash("set_volume"), { volume = bike_service.volume, max_volume = bike_service.max_volume })
 		msg.post("/go#monarch", hash("set_cost"), { cost = bike_service.cost })
 		msg.post("/go#monarch", hash("set_weight"), { weight = bike_service.weight })
+	elseif message_id == hash("play_select") then
+		sound.play("#sound_select")
+	elseif message_id == hash("play_open") then
+		sound.play("#sound_open")
+	elseif message_id == hash("play_checkbox") then
+		sound.play("#sound_checkbox")
 	end
 end
 

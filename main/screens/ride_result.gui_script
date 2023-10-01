@@ -14,6 +14,7 @@ local function process_ride(self)
 
     gui.set_enabled(self.button_next_node, true)
     self.druid:new_button("button_next/button", function()
+        msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_select"))
         if next then
             monarch.post("bike", hash("reset_bike"))
             monarch.back()
@@ -38,13 +39,17 @@ function init(self)
     if route_service.selected > 0 then
         process_ride(self)
     else
-        gui.set_text(gui.get_node("text_description"), "Select a Route")
+        gui.set_text(gui.get_node("text_result"), "")
+        gui.set_text(gui.get_node("text_review"), "Select a Route")
 
         gui.set_enabled(self.button_back_node, true)
         self.druid:new_button("button_back/button", function()
+            msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_select"))
             monarch.back()
         end)
     end
+
+    msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_open"))
 end
 
 function final(self)

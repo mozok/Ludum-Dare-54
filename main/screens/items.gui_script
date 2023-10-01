@@ -74,6 +74,7 @@ function init(self)
     self.data_list:set_data(self.data)
 
     self.druid:new_button("button_ok/button", function()
+        msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_select"))
         monarch.back()
     end)
 
@@ -84,6 +85,8 @@ function init(self)
         .back_out(gui.get_node("E_Anchor"), transitions.slide_out_right, gui.EASING_LINEAR, 0.5, 0)
 
     monarch.on_transition("items", transition)
+
+    msg.post(msg.url("bike", "/bike", "bike_controller"), hash("play_open"))
 end
 
 function final(self)
