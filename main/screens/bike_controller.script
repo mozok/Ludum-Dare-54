@@ -22,6 +22,8 @@ function init(self)
 	msg.post("/go#monarch", hash("set_weight"), { weight = bike_service.weight })
 	msg.post("/go#monarch", hash("set_cost"), { cost = bike_service.cost })
 
+	sound.play("#sound_background")
+
 	broadcast.register("add_bag")
 	broadcast.register("remove_bag")
 
